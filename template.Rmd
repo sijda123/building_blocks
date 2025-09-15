@@ -1,0 +1,103 @@
+---
+title: "Simple document"
+author: "Sijda Ahmed" 
+date: 2025-09-09
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    code_folding: hide
+---
+
+I'm an R Markdown document! 
+
+```{r echo=TRUE, message=FALSE}
+library(tidyverse)
+library(ggplot2)
+```
+
+
+# Section 1
+
+Here's a **code chunk** that samples from 
+a _normal distribution_:
+
+```{r}
+samp = rnorm(100)
+length(samp)
+```
+
+# Section 2
+
+I can take the mean of the sample, too!
+The mean is `r mean(samp)`.
+
+# Section 3
+
+This is where I'm going to to talk about code chunks.
+
+```{r}
+mean(samp)
+sd(samp)
+```
+
+Let's also make a dataframe.
+
+```{r}
+example_df = 
+  tibble(
+    vec_numeric = 1:4,
+    vec_char = c("My", "name", "is", "jeff"),
+    vec_factor = factor(c("male", "male", "female", "female"))
+  )
+```
+
+I'll create a new dataframe.
+
+```{r}
+new_df = 
+  tibble(
+    x = rnorm(100),
+    y = 1 + 2 * x + rnorm(100)
+  )
+```
+
+Let's make a plot and see how cool that is!
+
+```{r}
+plot_df = 
+  tibble(
+    x = rnorm(1000, mean = 1, sd = .5),
+    y = 1 + 2 * x + rnorm(1000)
+  )
+
+ggplot(plot_df, aes(x = x, y = y)) + geom_point()
+```
+
+This is a neat scatterplot!
+
+# Learning Assesement
+
+This chunk does one of the LA.
+
+```{r}
+la_df =
+  tibble(
+    numeric_samp = rnorm(500, mean=1),
+    greather_0 = numeric_samp > 0,
+    abs_val_samp = abs(numeric_samp)
+  )
+
+ggplot(la_df, aes(x = abs_val_samp)) + geom_histogram()
+
+median_samp = median(pull(la_df, numeric_samp))
+```
+
+The median of the variable containing absolute values is `r round(median_samp, digits = 2)`.
+
+"The sample size in the new dataframe is `r nrow(la_df)`."
+
+Something more complex is "The mean of my new variable is`r mean(pull(la_df, abs_val_samp))`."
+
+If I want to talk about `la_df`, I would use the backticks.
+
